@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		F86C0D222101986600B10696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86C0D212101986600B10696 /* AppDelegate.swift */; };
 		F86C0D242101986600B10696 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86C0D232101986600B10696 /* ViewController.swift */; };
-		F86C0D272101986600B10696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F86C0D252101986600B10696 /* Main.storyboard */; };
 		F86C0D292101986800B10696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86C0D282101986800B10696 /* Assets.xcassets */; };
 		F86C0D2C2101986800B10696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F86C0D2A2101986800B10696 /* LaunchScreen.storyboard */; };
+		F86C0D35210198C600B10696 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86C0D34210198C600B10696 /* AlertViewController.swift */; };
+		F86C0D37210241F800B10696 /* alertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86C0D36210241F800B10696 /* alertAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F86C0D1E2101986600B10696 /* CustomAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86C0D212101986600B10696 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F86C0D232101986600B10696 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F86C0D262101986600B10696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F86C0D282101986800B10696 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F86C0D2B2101986800B10696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F86C0D2D2101986800B10696 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F86C0D34210198C600B10696 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		F86C0D36210241F800B10696 /* alertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,23 @@
 		F86C0D202101986600B10696 /* CustomAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				F86C0D33210198A200B10696 /* CustomAlert */,
 				F86C0D212101986600B10696 /* AppDelegate.swift */,
 				F86C0D232101986600B10696 /* ViewController.swift */,
-				F86C0D252101986600B10696 /* Main.storyboard */,
 				F86C0D282101986800B10696 /* Assets.xcassets */,
 				F86C0D2A2101986800B10696 /* LaunchScreen.storyboard */,
 				F86C0D2D2101986800B10696 /* Info.plist */,
 			);
 			path = CustomAlertView;
+			sourceTree = "<group>";
+		};
+		F86C0D33210198A200B10696 /* CustomAlert */ = {
+			isa = PBXGroup;
+			children = (
+				F86C0D34210198C600B10696 /* AlertViewController.swift */,
+				F86C0D36210241F800B10696 /* alertAction.swift */,
+			);
+			path = CustomAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,7 +135,6 @@
 			files = (
 				F86C0D2C2101986800B10696 /* LaunchScreen.storyboard in Resources */,
 				F86C0D292101986800B10696 /* Assets.xcassets in Resources */,
-				F86C0D272101986600B10696 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +146,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F86C0D242101986600B10696 /* ViewController.swift in Sources */,
+				F86C0D35210198C600B10696 /* AlertViewController.swift in Sources */,
+				F86C0D37210241F800B10696 /* alertAction.swift in Sources */,
 				F86C0D222101986600B10696 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +155,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F86C0D252101986600B10696 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F86C0D262101986600B10696 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F86C0D2A2101986800B10696 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
