@@ -10,12 +10,11 @@ import UIKit
 
 class AlertViewController: UIView {
     // MARK: Variable
-    var btnAction: [AlertAction]?
     private let screenSize = UIScreen.main.bounds
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .fill
+        stackView.alignment = .center
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +24,7 @@ class AlertViewController: UIView {
     private let btnStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
+        stackView.alignment = .center
         stackView.distribution = .fillEqually
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +33,7 @@ class AlertViewController: UIView {
     
     private let alertView: UIView = {
         let screenSize = UIScreen.main.bounds
-        var height = Int(screenSize.height * 0.25)
+        var height = Int(screenSize.height * 0.3)
         var width = Int(screenSize.width - 40)
         var view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         view.layer.cornerRadius = 10
@@ -47,7 +46,7 @@ class AlertViewController: UIView {
     private let lblTitleAlert: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = .black
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
@@ -59,7 +58,7 @@ class AlertViewController: UIView {
     private let lblMessage: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.init(name: "Helvetical", size: 12)
+        label.font = UIFont.init(name: "Helvetical", size: 10)
         label.textColor = .black
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
@@ -68,68 +67,78 @@ class AlertViewController: UIView {
         return label
     }()
     
-     private var heightAnchorConstant: NSLayoutConstraint!
+    private var heightAnchorConstant: NSLayoutConstraint!
+    private var bottomAnchorMessage: NSLayoutConstraint!
     
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.24)
-        heightAnchorConstant = self.alertView.heightAnchor.constraint(equalToConstant: self.screenSize.height * 0.25)
-        
+        heightAnchorConstant = self.alertView.heightAnchor.constraint(greaterThanOrEqualToConstant: self.screenSize.height * 0.3)
+        bottomAnchorMessage = lblMessage.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -80)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     // MARK: Layout
-    private func setupLayout() {
+    private func autoLayoutWithoutStackView() {
         self.addSubview(self.alertView)
         NSLayoutConstraint.activate([
             self.alertView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.alertView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.alertView.widthAnchor.constraint(equalToConstant: self.screenSize.width - 40),
             heightAnchorConstant!
-         ])
-        
-        alertView.addSubview(mainStackView)
-        NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 10),
-            mainStackView.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -10),
-            mainStackView.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
-            mainStackView.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10)
         ])
         
-        mainStackView.addArrangedSubview(lblTitleAlert)
+        alertView.addSubview(lblTitleAlert)
         NSLayoutConstraint.activate([
-            lblTitleAlert.topAnchor.constraint(equalTo: mainStackView.topAnchor, constant: 0),
-            lblTitleAlert.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 0),
-            lblTitleAlert.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: 0)
+            lblTitleAlert.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 10),
+            lblTitleAlert.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 5),
+            lblTitleAlert.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -5)
         ])
         
-        mainStackView.addArrangedSubview(lblMessage)
+        alertView.addSubview(lblMessage)
+        NSLayoutConstraint.activate([
+            lblMessage.topAnchor.constraint(equalTo: lblTitleAlert.bottomAnchor, constant: 10),
+            lblMessage.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
+            lblMessage.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10),
+            bottomAnchorMessage!
+        ])
+        
+        alertView.addSubview(btnStackView)
+        NSLayoutConstraint.activate([
+            btnStackView.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 5),
+            btnStackView.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -5),
+            btnStackView.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -10),
+            btnStackView.heightAnchor.constraint(equalToConstant: 48)
+        ])
     }
     
     func initializationAlertDefault(title: String?, message: String?) {
-        self.setupLayout()
+        self.autoLayoutWithoutStackView()
         if let title = title, let message = message {
             lblTitleAlert.text = title
             lblMessage.text = message
         }
+        
     }
 
     func addAction(actionAlert: AlertAction) {
-        mainStackView.addArrangedSubview(btnStackView)
-        NSLayoutConstraint.activate([
-            btnStackView.heightAnchor.constraint(equalToConstant: 48)
-        ])
         btnStackView.addArrangedSubview(actionAlert)
     }
     
     func addSubViewIntoAlert(view: UIView) {
-        heightAnchorConstant?.isActive = false
-        self.alertView.heightAnchor.constraint(equalToConstant: self.screenSize.height * 0.25 + 200).isActive = true
-        mainStackView.addArrangedSubview(view)
+        bottomAnchorMessage.isActive = false
+        alertView.addSubview(view)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: lblMessage.bottomAnchor, constant: 10),
+            view.bottomAnchor.constraint(equalTo: btnStackView.topAnchor, constant: -10),
+            view.heightAnchor.constraint(equalToConstant: 180),
+            view.centerXAnchor.constraint(equalTo: alertView.centerXAnchor)
+        ])
     }
     
     // MARK: Action

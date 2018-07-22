@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     @objc private func handleTap() {
        alertView = AlertViewController(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
        self.view.addSubview(alertView!)
-        alertView?.initializationAlertDefault(title: "Success", message: "Test afasdasdasdsd")
+        alertView?.initializationAlertDefault(title: "Success", message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
         
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 240, height: 100))
         image.image = UIImage(named: "image")
