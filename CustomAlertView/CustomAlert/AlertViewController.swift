@@ -11,11 +11,13 @@ import UIKit
 class AlertViewController: UIView {
     // MARK: Variable
     private let screenSize = UIScreen.main.bounds
-    private let mainStackView: UIStackView = {
+    private var confirgurationHandler: ((UITextField) -> Void)?
+    open var textFields: [UITextField] = [UITextField]()
+    private let txFStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -30,6 +32,7 @@ class AlertViewController: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
     
     private let alertView: UIView = {
         let screenSize = UIScreen.main.bounds
@@ -141,6 +144,21 @@ class AlertViewController: UIView {
         ])
     }
     
+    func addTextFieldToAlert(confirgationHandler: ((UITextField) -> Void)?) {
+        bottomAnchorMessage.isActive = false
+        alertView.addSubview(txFStackView)
+        NSLayoutConstraint.activate([
+            txFStackView.topAnchor.constraint(equalTo: lblMessage.bottomAnchor, constant: 10),
+            txFStackView.bottomAnchor.constraint(equalTo: btnStackView.topAnchor, constant: -10),
+            txFStackView.centerXAnchor.constraint(equalTo: alertView.centerXAnchor)
+        ])
+        
+        let txtField = UITextField()
+        txFStackView.addArrangedSubview(txtField)
+        textFields.append(txtField)
+        confirgationHandler!(txtField)
+    }
+    
     // MARK: Action
     
     public func show() {
@@ -166,3 +184,4 @@ class AlertViewController: UIView {
         self.removeFromSuperview()
     }
 }
+

@@ -60,16 +60,24 @@ class ViewController: UIViewController {
        self.view.addSubview(alertView!)
         alertView?.initializationAlertDefault(title: "Success", message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
         
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 240, height: 100))
-        image.image = UIImage(named: "image")
-        image.contentMode = .scaleAspectFit
-        image.translatesAutoresizingMaskIntoConstraints = false
-        alertView?.addSubViewIntoAlert(view: image)
+//        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 240, height: 100))
+//        image.image = UIImage(named: "image")
+//        image.contentMode = .scaleAspectFit
+//        image.translatesAutoresizingMaskIntoConstraints = false
+//        alertView?.addSubViewIntoAlert(view: image)
+
+        alertView?.addTextFieldToAlert(confirgationHandler: { (textField) in
+            textField.placeholder = "Test"
+        })
+        
+        
         
         let okAction = AlertAction()
         okAction.initializationAction(title: "OK", styleAction: .Default) {
             self.alertView?.dimissView()
-            self.label.text = "OK"
+            for text in (self.alertView?.textFields)! {
+                print(text.text!)
+            }
         }
         alertView?.addAction(actionAlert: okAction)
         
